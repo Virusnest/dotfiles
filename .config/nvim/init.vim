@@ -1,3 +1,4 @@
+"Default Configs
 :set number
 :set autoindent
 :set tabstop=4
@@ -6,6 +7,7 @@
 :set softtabstop=4
 :set mouse=a
 
+"Pluggins
 call plug#begin()
 
 	Plug 'catppuccin/nvim', {'as': 'catppuccin'}
@@ -20,11 +22,19 @@ call plug#begin()
 	Plug 'renerocksai/telekasten.nvim'
 	Plug 'glepnir/dashboard-nvim'
 	Plug 'danilamihailov/beacon.nvim'
+	Plug 'terryma/vim-multiple-cursors'
+	Plug 'neoclide/coc.nvim'
 
 call plug#end()
+"custom Configs
 
 let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
 let g:lightline = {'colorscheme': 'catppuccin'}
+
+"keybinds
+nnoremap <C-f> :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
 
 lua << EOF
 require("catppuccin").setup({
