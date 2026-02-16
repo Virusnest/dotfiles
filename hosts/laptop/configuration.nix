@@ -8,8 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./de/hyprland.nix
-      <home-manager/nixos>
     ];
   
   home-manager.users.virusnest = import ./home.nix;
