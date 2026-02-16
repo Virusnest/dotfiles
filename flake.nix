@@ -1,27 +1,47 @@
 {
-  description = "A very basic flake";
+  description = "virusnest's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-outputs = { self, nixpkgs }:
-let
-  system = "x86_64-linux";
+  outputs = { self, nixpkgs }:
+  let
+    system = "x86_64-linux";
 
-  mkModuleList = dir:
-    map (name: dir + "/${name}")
-    (builtins.filter
-      (name: builtins.match ".*\\.nix" name != null)
-      (builtins.attrNames (builtins.readDir dir)));
-in
-{
-  nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-    inherit system;
+    mkModuleList = dir:
+  let
+    contents = builtins.readDir dir;
+    list = nixpkgs.lib.mapAttrsToList (name: type:
+      let path = dir + "/${name}"; in
+      if type == "directory" 
+      then mkModuleList path             # Dive into subfolders
+      else if (nixpkgs.lib.hasSuffix ".nix" name) 
+      then [ path ]                      # Found a file!
+      else []                            # Ignore everything else
+    ) contents;
+  in
+  builtins.concatLists list;
+  in
+  {
+    nixosConfigurations.nixtop = nixpkgs.lib.nixosSystem {
+      inherit system;
 
-    modules =
-      [ ./hosts/laptop/configuration.nix ]
-      ++ mkModuleList ./modules;
+      modules =
+        [ ./hosts/nixtop/configuration.nix
+          ./hosts/common.nix
+        ]
+        ++ mkModuleList ./modules;
+    };
+
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      modules =
+        [ ./hosts/desktop/configuration.nix
+          ./hosts/common.nix
+        ]
+        ++ mkModuleList ./modules;
+    };
   };
-};
 }
