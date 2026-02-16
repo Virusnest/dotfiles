@@ -9,13 +9,12 @@
     wget
     curl
     unzip
-    tar
     git
     vim
     neovim
 
     # System info / diagnostics
-    mesa_utils        # glxinfo, glxgears
+    mesa-demos        # glxinfo, glxgears
     htop
     lsof
     strace

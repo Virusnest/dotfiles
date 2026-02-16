@@ -10,9 +10,6 @@
       ./hardware-configuration.nix
     ];
   
-  home-manager.users.virusnest = import ./home.nix;
-  home-manager.useGlobalPkgs =true;
-  home-manager.useUserPackages = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

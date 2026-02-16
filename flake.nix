@@ -3,13 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        home-manager = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }:
   let
     lib = nixpkgs.lib;
 
@@ -37,7 +37,7 @@
     hostDirs =
       lib.filterAttrs (_: type: type == "directory")
         (builtins.readDir ./hosts);
-    username = "virusnest"
+    username = "virusnest";
 
     mkHost = hostName:
       let
@@ -53,8 +53,8 @@
           sharedModules
           ++ [
             ./hosts/${hostName}/configuration.nix
-            home-manager.nixosModules.home-manager
 
+            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
