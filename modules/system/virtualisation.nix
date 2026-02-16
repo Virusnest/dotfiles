@@ -23,7 +23,6 @@ in
         package = pkgs.qemu_kvm;
         runAsRoot = false;
 
-        ovmf.enable = true;   # UEFI support
         swtpm.enable = true;  # TPM for Windows 11
       };
     };
@@ -41,7 +40,8 @@ in
       virt-viewer
       spice
       spice-gtk
-      win-virtio
+      virtio-win
+      qemu_kvm
     ];
 
     boot.kernelModules = [

@@ -12,6 +12,7 @@
   
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  my.virtualisation.enable = true;
 
 
   # Bootloader.
