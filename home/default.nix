@@ -1,22 +1,32 @@
 { config, pkgs, ... }:
+
+let
+  username = "virusnest";
+in
 {
- home.username = "virusnest";
- home.homeDirectory = "/home/virusnest";
- home.stateVersion = "23.11";
+  # Enable Home Manager features
+  programs.home-manager.enable = true;
+wayland.windowManager.hyprland.systemd.enable = false;
+  # Enable Dank Material Shell for the user
 
- home.packages = with pkgs; [
-  firefox
-  discord
-  spotify
-  vlc
-  vscode
-  obsidian
-  prismlauncher
-  krita
-  easyeffects
-  steam
- ];
+  # Home info
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
+  home.stateVersion = "23.11";
 
-programs.home-manager.enable = true;
-
+  # Packages for this user
+  home.packages = with pkgs; [
+    firefox
+    discord
+    spotify
+    vlc
+    vscode
+    obsidian
+    prismlauncher
+    krita
+    easyeffects
+    steam
+    dms-shell
+    vintagestory
+  ];
 }

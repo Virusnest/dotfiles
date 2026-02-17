@@ -12,13 +12,14 @@
     git
     vim
     neovim
-
+    killall
     # System info / diagnostics
     mesa-demos        # glxinfo, glxgears
     htop
     lsof
     strace
     tmux
+    btop
 
     # File management
     rsync

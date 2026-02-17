@@ -8,6 +8,7 @@
     fira-code
     fira-code-symbols
     mplus-outline-fonts.githubRelease
+    font-awesome
     dina-font
     proggyfonts
   ];

@@ -9,8 +9,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+
+  outputs = { self, nixpkgs, home-manager,  ... }:
+
   let
+
     lib = nixpkgs.lib;
 
     # Recursively collect all .nix files in a directory
@@ -62,7 +65,6 @@
               home-manager.users.${username} =
                 import ./home;
             }
-
           ];
       };
 
