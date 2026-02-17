@@ -28,5 +28,11 @@ wayland.windowManager.hyprland.systemd.enable = false;
     steam
     dms-shell
     vintagestory
+    jetbrains.rider
+    jetbrains.pycharm
+    jetbrains.idea
+    xournalpp
   ];
+  gtk.iconTheme.package = pkgs.papirus-icon-theme;
+
 }

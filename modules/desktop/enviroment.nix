@@ -34,11 +34,16 @@ services.displayManager.dms-greeter = {
   kitty
   rofi
   quickshell
-  waybar
+  pywalfox-native
+  libsForQt5.qt5ct
+  nautilus
+  kdePackages.qt6ct
   matugen
   cava
   khal
   dgop
+  papirus-icon-theme
+  material-cursors
  ];
  services.dbus.enable = true;
  xdg.portal = {

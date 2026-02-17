@@ -6,5 +6,6 @@
   environment.systemPackages = with pkgs; [
     # Basic utilities
     libinput
+    libimobiledevice
   ];
 }

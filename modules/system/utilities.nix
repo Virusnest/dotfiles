@@ -20,6 +20,7 @@
     strace
     tmux
     btop
+    upower
 
     # File management
     rsync
