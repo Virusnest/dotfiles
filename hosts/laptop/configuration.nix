@@ -78,6 +78,7 @@ hardware.graphics = {
   enable = true;
   enable32Bit = true; # Crucial for Steam
 };
+ hardware.sensor.iio.enable = true;
 
 # Force Intel Drivers for Iris Xe
 services.xserver.videoDrivers = [ "modesetting" ];
@@ -86,6 +87,7 @@ hardware.graphics.extraPackages = with pkgs; [
   intel-media-driver # For Broadwell+ (Iris Xe)
   intel-vaapi-driver # For older apps
   libvdpau-va-gl
+  easyeffects
 ];
   services.upower.enable = true;
   # Some programs need SUID wrappers, can be configured further or are

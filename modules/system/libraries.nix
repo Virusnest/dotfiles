@@ -7,5 +7,11 @@
     # Basic utilities
     libinput
     libimobiledevice
+    appimage-run
   ];
+  programs.appimage = {
+  enable = true;
+  binfmt = true;
+};
+
 }

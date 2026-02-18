@@ -38,6 +38,7 @@ in
     environment.systemPackages = with pkgs; [
       virt-manager
       virt-viewer
+      virt-v2v
       spice
       spice-gtk
       virtio-win

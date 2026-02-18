@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs,pkgs-master, ... }:
 
 let
   username = "virusnest";
@@ -6,7 +6,7 @@ in
 {
   # Enable Home Manager features
   programs.home-manager.enable = true;
-wayland.windowManager.hyprland.systemd.enable = false;
+  wayland.windowManager.hyprland.systemd.enable = false;
   # Enable Dank Material Shell for the user
 
   # Home info
@@ -19,20 +19,29 @@ wayland.windowManager.hyprland.systemd.enable = false;
     firefox
     discord
     spotify
+    mpv
     vlc
+    blender
     vscode
     obsidian
     prismlauncher
     krita
-    easyeffects
     steam
-    dms-shell
+    lutris
+    pkgs-master.dms-shell
     vintagestory
     jetbrains.rider
     jetbrains.pycharm
-    jetbrains.idea
+    jetbrains.idea 
     xournalpp
   ];
-  gtk.iconTheme.package = pkgs.papirus-icon-theme;
 
+  
+  gtk.iconTheme.name = "adwaita-icon-theme";
+  gtk.iconTheme.package = pkgs.adwaita-icon-theme;
+  gtk.enable=true;
+  xdg.configFile."gtk-3.0/settings.ini".force = true;
+  xdg.configFile."gtk-4.0/settings.ini".force = true;
+
+services.easyeffects.enable = true;
 }

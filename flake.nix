@@ -3,18 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
 
-  outputs = { self, nixpkgs, home-manager,  ... }:
+  outputs = { self, nixpkgs, nixpkgs-master, home-manager,  ... }:
 
   let
 
     lib = nixpkgs.lib;
+
 
     # Recursively collect all .nix files in a directory
     collectNixFiles = dir:
@@ -42,28 +45,43 @@
         (builtins.readDir ./hosts);
     username = "virusnest";
 
-    mkHost = hostName:
+mkHost = hostName:
       let
         system =
-          if builtins.pathExists ./hosts/${hostName}/system.nix then
-            import ./hosts/${hostName}/system.nix
-          else
-            "x86_64-linux"; # default
+          if builtins.pathExists ./hosts/${hostName}/system.nix
+          then import ./hosts/${hostName}/system.nix
+          else "x86_64-linux";
+
+        pkgs-master = import nixpkgs-master {
+          inherit system;
+          config.allowUnfree = true;
+        };
       in
       lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit pkgs-master; };
         modules =
           sharedModules
           ++ [
-            ./hosts/${hostName}/configuration.nix
+            # --- THE FIX: Overlay dms-shell globally ---
+            ({ ... }: {
+              nixpkgs.config.allowUnfree = true;
+              nixpkgs.overlays = [
+                (final: prev: {
+                  dms-shell = pkgs-master.dms-shell;
+                })
+              ];
+            })
 
+            ./hosts/${hostName}/configuration.nix
+        
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-
-              home-manager.users.${username} =
-                import ./home;
+              home-manager.backupFileExtension = "backup"; 
+              home-manager.extraSpecialArgs = { inherit pkgs-master; };
+              home-manager.users.${username} = import ./home;
             }
           ];
       };
