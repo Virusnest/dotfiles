@@ -34,14 +34,10 @@ in
     jetbrains.pycharm
     jetbrains.idea 
     xournalpp
+    ciscoPacketTracer8
   ];
+                permittedInsecurePackages = [
+                "cisco-packet-tracer-8.2.2"
+              ];
 
-  
-  gtk.iconTheme.name = "adwaita-icon-theme";
-  gtk.iconTheme.package = pkgs.adwaita-icon-theme;
-  gtk.enable=true;
-  xdg.configFile."gtk-3.0/settings.ini".force = true;
-  xdg.configFile."gtk-4.0/settings.ini".force = true;
-
-services.easyeffects.enable = true;
 }

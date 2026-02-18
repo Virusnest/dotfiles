@@ -54,13 +54,14 @@ services.displayManager.dms-greeter = {
   iio-sensor-proxy
   jq
   khal
-      easyeffects
-
   dgop
   onboard
   gromit-mpx
   papirus-icon-theme
   adwaita-icon-theme
+  adwaita-icon-theme-legacy
+  tela-icon-theme
+  morewaita-icon-theme
   material-cursors
   kdePackages.breeze-gtk
   kdePackages.breeze

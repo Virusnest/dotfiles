@@ -72,7 +72,8 @@
   environment.systemPackages = with pkgs; [
     brightnessctl
     libinput
-mesa
+    fprint
+    mesa
   ];
 hardware.graphics = {
   enable = true;
