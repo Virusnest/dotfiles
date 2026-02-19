@@ -8,11 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+nix-monitor = {
+      url = "github:antonjah/nix-monitor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 
-  outputs = { self, nixpkgs, nixpkgs-master, home-manager,  ... }:
+  outputs = { self, nixpkgs, nixpkgs-master, home-manager,nix-monitor,  ... }:
 
   let
 
@@ -72,6 +75,7 @@ mkHost = hostName:
                 })
               ];
             })
+            nix-monitor.nixosModules.default
 
             ./hosts/${hostName}/configuration.nix
         

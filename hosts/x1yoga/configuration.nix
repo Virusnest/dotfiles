@@ -22,7 +22,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "nixtop"; # Define your hostname.
+  networking.hostName = "x1yoga"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -31,6 +31,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Australia/Melbourne";
@@ -72,7 +74,6 @@
   environment.systemPackages = with pkgs; [
     brightnessctl
     libinput
-    fprint
     mesa
   ];
 hardware.graphics = {
@@ -80,6 +81,7 @@ hardware.graphics = {
   enable32Bit = true; # Crucial for Steam
 };
  hardware.sensor.iio.enable = true;
+ services.fprintd.enable = true;
 
 # Force Intel Drivers for Iris Xe
 services.xserver.videoDrivers = [ "modesetting" ];
@@ -88,7 +90,6 @@ hardware.graphics.extraPackages = with pkgs; [
   intel-media-driver # For Broadwell+ (Iris Xe)
   intel-vaapi-driver # For older apps
   libvdpau-va-gl
-  easyeffects
 ];
   services.upower.enable = true;
   # Some programs need SUID wrappers, can be configured further or are

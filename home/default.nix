@@ -13,6 +13,7 @@ in
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.11";
+services.kdeconnect.enable = true;
 
   # Packages for this user
   home.packages = with pkgs; [
@@ -34,10 +35,12 @@ in
     jetbrains.pycharm
     jetbrains.idea 
     xournalpp
-    ciscoPacketTracer8
+    easyeffects
   ];
-                permittedInsecurePackages = [
-                "cisco-packet-tracer-8.2.2"
-              ];
+  #home-manager.users.virusnest.home.services.kdeconnect.enable = true;
+
+
+
+
 
 }

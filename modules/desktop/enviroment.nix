@@ -22,6 +22,16 @@ services.displayManager.dms-greeter = {
   package = pkgs-master.dms-shell;
   compositor.name = "hyprland";  # Or "hyprland" or "sway"
 };
+
+programs.nix-monitor = {
+  enable = true;
+  
+  # Required: customize for your setup
+  rebuildCommand = [ 
+    "bash" "-c" 
+    "sudo nixos-rebuild switch --flake .#hostname 2>&1"
+  ];
+};
  programs.hyprland = {
   enable = true;
   xwayland.enable = true;
@@ -32,7 +42,11 @@ services.displayManager.dms-greeter = {
   QT_QPA_PLATFORMTHEME="qt6ct";
   QT_QPA_PLATFORMTHEME_QT6="qt6ct";
  };     
- 
+ programs.kdeconnect.enable = true;
+ networking.firewall = rec {
+  allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+  allowedUDPPortRanges = allowedTCPPortRanges;
+  };
  programs.uwsm.enable = true;
 
  environment.systemPackages = with pkgs; [

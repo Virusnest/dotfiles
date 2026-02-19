@@ -1,7 +1,6 @@
-{config ,pkgs, ...}:
- {
-  enviroment.systemPackages =  with pkgs[
-    ciscoPacketTracer8
-  ]
-
+{ config, pkgs, ...}:
+{
+  environment.systemPackages = with pkgs; [
+    cisco-packet-tracer_9
+  ];
 }
