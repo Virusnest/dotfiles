@@ -7,41 +7,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1771269455,
-        "narHash": "sha256-BZ31eN5F99YH6vkc4AhzKGE+tJgJ52kl8f01K7wCs8w=",
+        "lastModified": 1771531206,
+        "narHash": "sha256-1R3Wx6KUkMb4x4E5UOhW9p6rqiexzSGGWxZqSHqW5n0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5f1d42a97b19803041434f66681d5c44c9ae62e3",
+        "rev": "91be7cce763fa4022c7cf025a71b0c366d1b6e77",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "nix-monitor": {
-      "locked": {
-        "lastModified": 1766244099,
-        "narHash": "sha256-PotQG3LnS8LsOnsHtyS5MFBw0qbRvr3886+3nzxL6R4=",
-        "owner": "antonjah",
-        "repo": "nix-monitor",
-        "rev": "bd941a0e71b8f7763b45c22281a44ff554f82666",
-        "type": "github"
-      },
-      "original": {
-        "owner": "antonjah",
-        "repo": "nix-monitor",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771008912,
-        "narHash": "sha256-gf2AmWVTs8lEq7z/3ZAsgnZDhWIckkb+ZnAo5RzSxJg=",
+        "lastModified": 1771369470,
+        "narHash": "sha256-0NBlEBKkN3lufyvFegY4TYv5mCNHbi5OmBDrzihbBMQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a82ccc39b39b621151d6732718e3e250109076fa",
+        "rev": "0182a361324364ae3f436a63005877674cf45efb",
         "type": "github"
       },
       "original": {
@@ -53,11 +38,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1771394968,
-        "narHash": "sha256-5uCXc7KBSeHvIIrhWr8VZnwsH8uuZbA88KBasI15mwo=",
+        "lastModified": 1771531951,
+        "narHash": "sha256-lIPqeLRV0iUzF4gugXZMWzpScmdkJbqOyLoh0t5BDvM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "01eb27208b469d6ce8daed732ef4e501628a5102",
+        "rev": "dbb16755143bb817aea07ea96f5304026e55fabe",
         "type": "github"
       },
       "original": {
@@ -70,7 +55,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nix-monitor": "nix-monitor",
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master"
       }

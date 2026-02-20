@@ -32,5 +32,14 @@
     gzip
     bzip2
     xz
+    
+    util-linux
+    wev
+    usbutils
+    toybox
+    pciutils
+    busybox
+    screen
+    minicom
   ];
 }

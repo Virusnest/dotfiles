@@ -2,14 +2,12 @@
 
 
 {
+
+  security.pam.services.login.fprintAuth = true;
 programs.dms-shell = {
   enable = true;
 
-  systemd = {
-    enable = true;             # Systemd service for auto-start
-    restartIfChanged = true;   # Auto-restart dms.service when dms-shell changes
-  };
-  package = pkgs-master.dms-shell;
+  systemd.enable=true;
   
   # Core features
   enableSystemMonitoring = true;     # System monitoring widgets (dgop)
@@ -19,18 +17,8 @@ programs.dms-shell = {
 };
 services.displayManager.dms-greeter = {
   enable = true;
-  package = pkgs-master.dms-shell;
   compositor.name = "hyprland";  # Or "hyprland" or "sway"
-};
-
-programs.nix-monitor = {
-  enable = true;
-  
-  # Required: customize for your setup
-  rebuildCommand = [ 
-    "bash" "-c" 
-    "sudo nixos-rebuild switch --flake .#hostname 2>&1"
-  ];
+  configHome = "/home/virusnest";
 };
  programs.hyprland = {
   enable = true;

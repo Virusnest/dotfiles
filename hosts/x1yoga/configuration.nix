@@ -75,7 +75,10 @@
     brightnessctl
     libinput
     mesa
+    linux-enable-ir-emitter
+    ffmpeg v4l-utils
   ];
+  
 hardware.graphics = {
   enable = true;
   enable32Bit = true; # Crucial for Steam
@@ -110,6 +113,27 @@ hardware.graphics.extraPackages = with pkgs; [
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+boot.kernelModules = [ "v4l2loopback" ];
+boot.extraModprobeConfig = ''
+    options v4l2loopback video_nr=4 card_lreabel="IR-Virtual-Bridge" exclusive_caps=1
+  '';
+
+  services.avahi = {
+  enable = true;
+  nssmdns4 = true;
+  openFirewall = true;
+};
+
+services.logind.settings.Login.HandlePowerKey = "ignore";
+
+services.printing = {
+  enable = true;
+  drivers = with pkgs; [
+    cups-filters
+    cups-browsed
+  ];
+};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

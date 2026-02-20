@@ -8,14 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-nix-monitor = {
-      url = "github:antonjah/nix-monitor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
 
-  outputs = { self, nixpkgs, nixpkgs-master, home-manager,nix-monitor,  ... }:
+  outputs = { self, nixpkgs, nixpkgs-master, home-manager,  ... }:
 
   let
 
@@ -67,26 +63,18 @@ mkHost = hostName:
           sharedModules
           ++ [
             # --- THE FIX: Overlay dms-shell globally ---
-            ({ ... }: {
-              nixpkgs.config.allowUnfree = true;
-              nixpkgs.overlays = [
-                (final: prev: {
-                  dms-shell = pkgs-master.dms-shell;
-                })
-              ];
-            })
-            nix-monitor.nixosModules.default
 
             ./hosts/${hostName}/configuration.nix
-        
             home-manager.nixosModules.home-manager
             {
+              
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup"; 
               home-manager.extraSpecialArgs = { inherit pkgs-master; };
               home-manager.users.${username} = import ./home;
             }
+
           ];
       };
 
