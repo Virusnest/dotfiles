@@ -11,9 +11,9 @@ in
       SCREENSHOTS = "${config.home.homeDirectory}/Pictures/Screenshots";
     };
   };
-  xdg.mimeApps = {
-    enable = true;
-  };
+  #xdg.mimeApps = {
+    #enable = true;
+  #};
   # Enable Home Manager features
   programs.home-manager.enable = true;
   wayland.windowManager.hyprland.systemd.enable = false;
@@ -31,11 +31,15 @@ in
   # Packages for this user
   home.packages = with pkgs; [
     firefox
-    discord
+    (discord.override {
+      withOpenASAR = true; # can do this here too
+      withVencord = true;
+    })
     spotify
     mpv
     vlc
     blender
+    gimp
     vscode
     obsidian
     prismlauncher
@@ -46,7 +50,9 @@ in
     jetbrains.rider
     jetbrains.pycharm
     jetbrains.idea 
-    xournalpp
+
+    vencord
+    osu-lazer
   ];
   #home-manager.users.virusnest.home.services.kdeconnect.enable = true;
 

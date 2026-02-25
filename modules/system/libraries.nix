@@ -8,6 +8,9 @@
     libinput
     libimobiledevice
     appimage-run
+    libGL
+    glfw
+    wayland
   ];
   programs.appimage = {
   enable = true;

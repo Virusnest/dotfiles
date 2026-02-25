@@ -36,10 +36,10 @@ services.displayManager.dms-greeter = {
   allowedUDPPortRanges = allowedTCPPortRanges;
   };
  programs.uwsm.enable = true;
-
  environment.systemPackages = with pkgs; [
   kitty
   rofi
+  wayscriber
   quickshell
   pywalfox-native
   libsForQt5.qt5ct
@@ -67,7 +67,20 @@ services.displayManager.dms-greeter = {
   material-cursors
   kdePackages.breeze-gtk
   kdePackages.breeze
+  feh
+  
+  moonlight-qt
  ];
+   services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+    
+  };
+  programs.weylus.enable = true;
+
+ services.tailscale.enable = true;
  services.dbus.enable = true;
  xdg.portal = {
   enable = true;

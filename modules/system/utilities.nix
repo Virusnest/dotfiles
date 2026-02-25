@@ -41,5 +41,7 @@
     busybox
     screen
     minicom
+    android-tools
   ];
+
 }
