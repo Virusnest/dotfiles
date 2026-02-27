@@ -3,7 +3,8 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-color-emoji
+    twemoji-color-font
+    twitter-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
@@ -12,5 +13,13 @@
     dina-font
     proggyfonts
   ];
+  fonts.fontconfig.useEmbeddedBitmaps = true;
+  fonts.fontconfig = {
+      enable = true;
+      defaultFonts.emoji = [
+          "Twitter Color Emoji"
+      ];
+  };
+
 
 }

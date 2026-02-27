@@ -1,9 +1,31 @@
-{ config, pkgs,pkgs-master, ... }:
+{ config, spicetify-nix, pkgs,pkgs-master, ... }:
 
 let
   username = "virusnest";
+    spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
 in
 {
+  imports = [
+    spicetify-nix.homeManagerModules.default
+  ];
+  programs.spicetify = {
+    enable = true;
+    theme = spicePkgs.themes.defaultDynamic;
+    enabledExtensions = with spicePkgs.extensions; [
+      wikify
+      aiBandBlocker
+      history
+      betterGenres
+    ];
+    enabledCustomApps = with spicePkgs.apps;[
+      nameThatTune
+    ];
+  };
+  
+
+    
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true; # Force Nix to actually make the folders
@@ -35,8 +57,9 @@ in
       withOpenASAR = true; # can do this here too
       withVencord = true;
     })
-    spotify
+   # spotify
     mpv
+    aseprite
     vlc
     blender
     gimp
@@ -50,7 +73,7 @@ in
     jetbrains.rider
     jetbrains.pycharm
     jetbrains.idea 
-
+    inkscape
     vencord
     osu-lazer
   ];

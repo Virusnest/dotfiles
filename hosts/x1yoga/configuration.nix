@@ -84,10 +84,28 @@ hardware.graphics = {
   enable = true;
   enable32Bit = true; # Crucial for Steam
 };
+
+services.auto-cpufreq.enable = false;
+services.power-profiles-daemon.enable = false;
+services.auto-cpufreq.settings = {
+  battery = {
+     governor = "powersave";
+     turbo = "never";
+  };
+  charger = {
+     governor = "performance";
+     turbo = "auto";
+  };
+};
+
+
  hardware.sensor.iio.enable = true;
  services.fprintd.enable = true;
-
-# Force Intel Drivers for Iris Xe
+  services.tuned = {
+    enable = true;
+    ppdSupport=true;
+    settings.dynamic_tuning = true;
+  };# Force Intel Drivers for Iris Xe
 services.xserver.videoDrivers = [ "modesetting" ];
 
 hardware.graphics.extraPackages = with pkgs; [
@@ -95,7 +113,7 @@ hardware.graphics.extraPackages = with pkgs; [
   intel-vaapi-driver # For older apps
   libvdpau-va-gl
 ];
-  services.upower.enable = true;
+services.upower.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

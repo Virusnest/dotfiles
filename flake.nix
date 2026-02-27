@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,7 +12,7 @@
   };
 
 
-  outputs = { self, nixpkgs, nixpkgs-master, home-manager,  ... }:
+  outputs = { self, spicetify-nix, nixpkgs, nixpkgs-master, home-manager,  ... }:
 
   let
 
@@ -65,13 +66,14 @@ mkHost = hostName:
             # --- THE FIX: Overlay dms-shell globally ---
 
             ./hosts/${hostName}/configuration.nix
+            
             home-manager.nixosModules.home-manager
             {
               
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup"; 
-              home-manager.extraSpecialArgs = { inherit pkgs-master; };
+              home-manager.extraSpecialArgs = { inherit pkgs-master spicetify-nix; };
               home-manager.users.${username} = import ./home;
             }
 

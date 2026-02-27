@@ -41,6 +41,7 @@ services.displayManager.dms-greeter = {
   rofi
   wayscriber
   quickshell
+  scrcpy
   pywalfox-native
   libsForQt5.qt5ct
   adwaita-qt
@@ -78,7 +79,6 @@ services.displayManager.dms-greeter = {
     openFirewall = true;
     
   };
-  programs.weylus.enable = true;
 
  services.tailscale.enable = true;
  services.dbus.enable = true;
@@ -86,6 +86,8 @@ services.displayManager.dms-greeter = {
   enable = true;
   extraPortals = [pkgs.xdg-desktop-portal-gtk];
  };
+ programs.gamemode.enable = true;
+ programs.dconf.enable = true;
  security.rtkit.enable = true;
  services.pipewire = {
   enable = true;
