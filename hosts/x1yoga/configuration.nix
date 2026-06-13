@@ -9,7 +9,23 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-  
+
+  # These are the standard nix.conf settings
+  nix.settings = {
+    cores = 4;
+    max-jobs = 1;
+  };
+
+  # These control the systemd daemon's politeness
+  # They live outside of the 'settings' block
+# "idle" ensures Nix only gets CPU cycles when nothing else wants them.
+  nix.daemonCPUSchedPolicy = "idle";
+
+  # Keep these as they are still the standard for Disk I/O
+  nix.daemonIOSchedClass = "idle";
+  nix.daemonIOSchedPriority = 7;
+  services.udisks2.enable = true;
+
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   my.virtualisation.enable = true;
@@ -40,7 +56,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_AU.UTF-8";
-  programs.nix-ld.enable = true;
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_AU.UTF-8";
     LC_IDENTIFICATION = "en_AU.UTF-8";
@@ -59,11 +74,15 @@
     variant = "";
   };
 
+boot.kernel.sysctl = {
+  "net.ipv4.ip_forward" = 1;
+  "net.ipv6.conf.all.forwarding" = 1; # Optional: includes IPv6
+};
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.virusnest = {
     isNormalUser = true;
     description = "Virusnest";
-    extraGroups = [ "networkmanager" "wheel" "greeter" ];
+    extraGroups = [ "networkmanager" "wheel" "greeter" "video" ];
     packages = with pkgs; [];
   };
 

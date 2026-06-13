@@ -30,8 +30,12 @@
 
     # Compression / archiving
     gzip
-    bzip2
+    bzip2    
     xz
+    p7zip
+    innoextract
+
+    openssl
     
     util-linux
     wev
@@ -42,6 +46,20 @@
     screen
     minicom
     android-tools
+    fastfetch
+    pavucontrol
+    yt-dlp
+
+    
   ];
+services.gvfs.enable = true;
+  services.ollama = {
+    enable = true;
+    # Optional: preload models, see https://ollama.com/library
+    loadModels = [ 
+      "hf.co/mradermacher/gemma-3n-E2B-GGUF:Q4_K_M" 
+    ];
+  };
+
 
 }

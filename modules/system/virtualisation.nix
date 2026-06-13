@@ -18,7 +18,7 @@ in
 
     virtualisation.libvirtd = {
       enable = true;
-
+      firewallBackend = "iptables";
       qemu = {
         package = pkgs.qemu_kvm;
         runAsRoot = false;
